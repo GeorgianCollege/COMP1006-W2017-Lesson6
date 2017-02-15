@@ -23,5 +23,5 @@ $statement->execute(); // run on the db server
 $statement->closeCursor(); // close the connection
 
 // redirect to index page
-include('index.php');
+header('Location: index.php');
 ?>

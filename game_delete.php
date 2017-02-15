@@ -11,7 +11,7 @@ if($gameID != false) {
     $statement->closeCursor(); // close off database
 }
 
-// redirect back to the index page
-include("index.php");
+// redirect to index page
+header('Location: index.php');
 
 ?>
