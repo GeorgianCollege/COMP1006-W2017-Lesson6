@@ -3,13 +3,18 @@ include_once('database.php'); // include the database connection file
 
 $gameID = $_GET["gameID"]; // assigns the gameID from the URL
 
+if($gameID == 0) {
+    $game = null;
+    $isAddition = 1;
+} else {
+    $isAddition = 0;
 $query = "SELECT * FROM games WHERE Id = :game_id "; // SQL statement
 $statement = $db->prepare($query); // encapsulate the sql statement
 $statement->bindValue(':game_id', $gameID);
 $statement->execute(); // run on the db server
 $game = $statement->fetch(); // returns only one record
 $statement->closeCursor(); // close the connection
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,8 +36,8 @@ $statement->closeCursor(); // close the connection
             <h1>Game Details</h1>
             <form action="update_database.php" method="post">
                 <div class="form-group">
-                    <label for="IDTextField">Game ID</label>
-                    <input type="text" class="form-control" id="IDTextField" name="IDTextField"
+                    <label for="IDTextField" hidden>Game ID</label>
+                    <input type="hidden" class="form-control" id="IDTextField" name="IDTextField"
                            placeholder="Game ID" value="<?php echo $game['Id']; ?>">
                 </div>
                 <div class="form-group">
@@ -45,7 +50,8 @@ $statement->closeCursor(); // close the connection
                     <input type="text" class="form-control" id="CostTextField" name="CostTextField"
                            placeholder="Game Cost" required  value="<?php echo $game['Cost']; ?>">
                 </div>
-                <button type="submit" id="UpdateButton" class="btn btn-default">Update</button>
+                    <input type="hidden" name="isAddition" value="<?php echo $isAddition; ?>">
+                <button type="submit" id="SubmitButton" class="btn btn-primary">Submit</button>
             </form>
 
         </div>

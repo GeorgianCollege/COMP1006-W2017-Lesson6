@@ -25,7 +25,9 @@ $statement->closeCursor(); // close the connection
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <h1>Games List</h1>
-
+            <a class="btn btn-primary" href="game_details.php?gameID=0">
+                <i class="fa fa-plus"></i> Add New Game</a>
+            <br>
             <table class="table table-striped table-hover table-bordered">
                 <tr>
                     <th>ID</th>
@@ -43,7 +45,7 @@ $statement->closeCursor(); // close the connection
 
                             <td><a class="btn btn-primary" href="game_details.php?gameID=<?php echo $game['Id'] ?>"><i class="fa fa-pencil-square-o"></i> Edit</a></td>
 
-                            <td><a class="btn btn-danger" href=""><i class="fa fa-trash-o"></i> Delete</a></td>
+                            <td><a class="btn btn-danger" href="game_delete.php?gameID=<?php echo $game['Id'] ?>"><i class="fa fa-trash-o"></i> Delete</a></td>
                         </tr>
                     <?php endforeach; ?>
 
